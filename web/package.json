@@ -1,0 +1,27 @@
+{
+  "name": "@cheesycrab/calyx-web",
+  "version": "0.1.0",
+  "description": "Calyx web runtime — a peer of the native core, pinned to ABI v1.6. DOM-free host (Node + browser) with a canvas/PWA player.",
+  "license": "LGPL-3.0-or-later",
+  "type": "module",
+  "private": true,
+  "exports": {
+    ".": "./src/runtime.mjs"
+  },
+  "scripts": {
+    "test": "node --test",
+    "conform": "node conform.mjs",
+    "smoke": "node smoke.mjs",
+    "product-smoke": "node product-smoke.mjs",
+    "sideb-smoke": "node product-smoke.mjs --profile sideb",
+    "touch-smoke": "node touch-smoke.mjs",
+    "gen-icons": "node tools/gen-icons.mjs",
+    "gen-font": "node tools/gen-font.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  },
+  "dependencies": {
+    "qrcode-generator": "1.4.4"
+  }
+}

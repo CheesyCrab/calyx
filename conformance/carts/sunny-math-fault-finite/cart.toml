@@ -1,0 +1,11 @@
+[cart]
+name = "sunny-math-fault-finite"
+entry = "cart.ts"
+abi = "v1"
+
+[run]
+frames = 1
+
+[fault]
+frame = 0
+kind = "abort"

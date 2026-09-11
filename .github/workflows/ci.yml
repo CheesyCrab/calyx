@@ -1,0 +1,50 @@
+name: public source CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: .
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: |
+            conformance/package-lock.json
+            web/package-lock.json
+
+      - name: Install native build dependencies
+        run: sudo apt-get update && sudo apt-get install -y libasound2-dev
+
+      - name: Install AssemblyScript
+        run: npm ci --prefix conformance --no-audit --no-fund
+
+      - name: Install web dependencies
+        run: npm ci --prefix web --no-audit --no-fund
+
+      - name: Install Chromium
+        run: npx --prefix web playwright install --with-deps chromium
+
+      - name: Check public identity and structure
+        run: python3 tools/public_check.py --root .
+
+      - name: Run commit-readiness gate
+        run: python3 tools/dev.py commit
+
+      - name: Run browser smoke
+        working-directory: web
+        run: node smoke.mjs

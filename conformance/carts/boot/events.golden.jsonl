@@ -1,0 +1,6 @@
+{"audio":[{"dur":3,"flags":12,"freq":660,"op":"tone","vol":30}],"f":3}
+{"audio":[{"dur":18,"flags":14,"freq":400,"op":"tone","vol":50}],"f":10}
+{"audio":[{"dur":7,"flags":15,"freq":200,"op":"tone","vol":60}],"f":38}
+{"audio":[{"dur":7,"flags":15,"freq":200,"op":"tone","vol":60}],"f":40}
+{"audio":[{"dur":24,"flags":13,"freq":523,"op":"tone","vol":50}],"f":48}
+{"f":95,"sys":[{"op":"exit"}]}

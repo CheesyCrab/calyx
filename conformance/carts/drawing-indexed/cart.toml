@@ -1,0 +1,16 @@
+[cart]
+name = "drawing-indexed"
+entry = "cart.ts"
+abi = "v1"
+
+[run]
+frames = 8
+
+[witness]
+min_distinct_frame_hashes = 8
+
+[expected]
+run_hash = "76e994ec658c2b0f"
+final_hash = "55a2c86f4de0598b"
+palette = "SWEETIE_16"
+blessed_by = "core"

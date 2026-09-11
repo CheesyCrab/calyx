@@ -1,0 +1,10 @@
+[cart]
+name = "Calyx Boot"
+author = "Cheesy Crab"
+license = "GPL-3.0-or-later"
+version = "1.0.0"
+entry = "cart.ts"
+abi = "v1"
+role = "boot"
+system = true
+public_source = true

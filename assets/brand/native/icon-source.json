@@ -1,0 +1,42 @@
+{
+  "schema": 1,
+  "generator": "tools/gen_native_icons.mjs",
+  "products": {
+    "release": {
+      "source": {
+        "path": "assets/brand/calyx-mark.svg",
+        "sha256": "b5eb42da5844aeba430e7fc3cfca2fd51c19982ace5b490d1054048c11e8113f"
+      },
+      "outputs": [
+        {
+          "path": "assets/brand/native/calyx.ico",
+          "sha256": "ea2feae4435fab5b7af8d55c008699f09700ed491d3c8373ad34706242a49cea",
+          "bytes": 25133
+        },
+        {
+          "path": "assets/brand/native/Calyx.icns",
+          "sha256": "f0a0a5a9609ecc0ea826bbaf4da94793648cc5970adf2e068a5c40f53964484d",
+          "bytes": 48282
+        }
+      ]
+    },
+    "sideb": {
+      "source": {
+        "path": "assets/brand/calyx-sideb-mark.svg",
+        "sha256": "7deb9fa6457d7660ea49d346999d5892b818a096276c085ee6269fa227bceb7a"
+      },
+      "outputs": [
+        {
+          "path": "assets/brand/native/calyx-sideb.ico",
+          "sha256": "708c485e01f1b9124003a6eef02f49e32498b80ee5121d373c7ed7c142d76ed0",
+          "bytes": 25517
+        },
+        {
+          "path": "assets/brand/native/Calyx-Side-B.icns",
+          "sha256": "b03f09ff2d7ac761e62c30f811369253d11fea2924f43e7d4ee1224091acc781",
+          "bytes": 49254
+        }
+      ]
+    }
+  }
+}

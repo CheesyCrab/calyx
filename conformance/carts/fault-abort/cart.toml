@@ -1,0 +1,13 @@
+[cart]
+name  = "fault-abort"
+entry = "cart.ts"
+abi   = "v1"
+
+[run]
+frames = 10
+
+# EXPECTED to fault (ABI §6a): an AssemblyScript abort on frame 3, surfaced
+# as kind "abort". Frames 0–2 run first, so the frame index is verified too.
+[fault]
+frame = 3
+kind  = "abort"

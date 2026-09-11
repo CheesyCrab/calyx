@@ -1,0 +1,7 @@
+{"f":15,"audio":[{"dur":5,"flags":12,"freq":880,"op":"tone","vol":40}]}
+{"f":23,"audio":[{"dur":7,"flags":14,"freq":150,"op":"tone","vol":70},{"dur":3,"flags":15,"freq":800,"op":"tone","vol":30},{"dur":21,"flags":0,"freq":262,"op":"tone","vol":50},{"dur":86,"flags":5,"freq":131,"op":"tone","vol":50}]}
+{"f":40,"audio":[{"dur":6,"flags":14,"freq":440,"op":"tone","vol":60}]}
+{"f":47,"audio":[{"dur":3,"flags":15,"freq":800,"op":"tone","vol":30},{"dur":21,"flags":0,"freq":330,"op":"tone","vol":50},{"dur":86,"flags":5,"freq":196,"op":"tone","vol":50}]}
+{"f":60,"audio":[{"dur":5,"flags":12,"freq":880,"op":"tone","vol":40},{"dur":6,"flags":14,"freq":440,"op":"tone","vol":60}]}
+{"f":71,"audio":[{"dur":6,"flags":15,"freq":250,"op":"tone","vol":50},{"dur":3,"flags":15,"freq":800,"op":"tone","vol":30},{"dur":21,"flags":0,"freq":392,"op":"tone","vol":50},{"dur":86,"flags":5,"freq":131,"op":"tone","vol":50}]}
+{"f":95,"audio":[{"dur":3,"flags":15,"freq":800,"op":"tone","vol":30},{"dur":43,"flags":0,"freq":523,"op":"tone","vol":50},{"dur":86,"flags":5,"freq":196,"op":"tone","vol":50}]}

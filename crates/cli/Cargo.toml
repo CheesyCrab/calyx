@@ -1,0 +1,45 @@
+[package]
+name = "calyx-cli"
+version = "0.1.0"
+description = "The `calyx` native executable — headless, terminal, winit, and portable SDL2 presenters plus the verify/bless conformance harness."
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[[bin]]
+name = "calyx"
+path = "src/main.rs"
+
+[dependencies]
+calyx-core = { path = "../core" }
+serde_json = "1"
+# PNG sidecars for the headless dump (ABI §6a). PNG only — no decoders.
+image = { version = "0.25", default-features = false, features = ["png"] }
+# Read cart.toml manifests and write the [expected] block on bless,
+# preserving formatting.
+toml_edit = "0.22"
+libc = "0.2"
+# Terminal console presenter (pre-T12 DX): raw-mode stdin + key decode for
+# the interactive SSH launcher loop. The input layer, not a widget lib.
+crossterm = "0.28"
+# Native window presenter (T8) — CPU blit on the verified framebuffer,
+# per the roadmap's softbuffer guidance (no GPU dependency, handheld-safe).
+winit = { version = "0.30", optional = true }
+softbuffer = { version = "0.4", optional = true }
+# Native speaker presenter (T13). Synthesis stays in-tree and presenter-side;
+# cpal is only the portable device callback.
+cpal = { version = "0.18.2", optional = true }
+# Portable native presenter (T14). Generic distributions enable
+# `sdl-bundled`; platform adapters may enable `sdl` alone to link an SDL2
+# supplied as part of the operating-system platform contract.
+sdl2 = { version = "0.38", optional = true }
+
+[build-dependencies]
+winresource = "0.1.31"
+
+[features]
+default = ["window", "audio"]
+window = ["dep:winit", "dep:softbuffer"]
+audio = ["dep:cpal"]
+sdl = ["dep:sdl2"]
+sdl-bundled = ["sdl", "sdl2/bundled", "sdl2/static-link"]

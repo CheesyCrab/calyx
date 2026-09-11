@@ -1,0 +1,14 @@
+{
+  "name": "@cheesycrab/cart-horizon-burn",
+  "version": "0.6.0",
+  "private": true,
+  "license": "GPL-3.0-or-later",
+  "description": "Deterministic globular rail-shmup prototype for Cheesy Crab Calyx.",
+  "type": "module",
+  "scripts": {
+    "build": "asc cart.ts --outFile cart.wasm --optimize"
+  },
+  "devDependencies": {
+    "assemblyscript": "0.28.20"
+  }
+}

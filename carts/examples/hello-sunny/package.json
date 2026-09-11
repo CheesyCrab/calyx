@@ -1,0 +1,15 @@
+{
+  "name": "@cheesycrab/cart-hello-sunny",
+  "version": "0.2.0",
+  "private": true,
+  "license": "GPL-3.0-or-later",
+  "description": "Canonical interactive Sunny starter and Calyx demonstration cart.",
+  "type": "module",
+  "scripts": {
+    "build": "asc cart.ts --outFile cart.wasm --optimize --maximumMemory 1024",
+    "check:demo": "npm run build && node check-demo.mjs"
+  },
+  "devDependencies": {
+    "assemblyscript": "0.28.20"
+  }
+}

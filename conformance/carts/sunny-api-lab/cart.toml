@@ -1,0 +1,17 @@
+[cart]
+name = "sunny-api-lab"
+entry = "cart.ts"
+abi = "v1"
+
+[run]
+frames = 700
+feed = "sunny-api-lab.in.json"
+
+[witness]
+min_distinct_frame_hashes = 180
+
+[expected]
+run_hash = "8aab5b8eb86e4624"
+final_hash = "f42ba2d27a7bb3ea"
+palette = "SWEETIE_16"
+blessed_by = "core"

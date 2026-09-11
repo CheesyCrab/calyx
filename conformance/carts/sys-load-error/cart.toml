@@ -1,0 +1,10 @@
+[cart]
+name = "sys-load-error"
+entry = "cart.ts"
+abi = "v1"
+
+[run]
+frames = 1
+
+[fault]
+kind = "load"

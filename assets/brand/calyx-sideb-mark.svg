@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Calyx Side B mark</title>
+  <defs>
+    <path id="panel" fill-rule="evenodd" d="
+      M256 24c-8 34-43 45-43 82v35l-41 41 38 38c11-8 21-13 30-15 5-6 10-9 16-9s11 3 16 9c9 2 19 7 30 15l38-38-41-41v-35c0-37-35-48-43-82z
+      M256 48c-10 28-28 36-28 65v35l-35 35 7 7 38-38v-39c0-22 12-35 18-51 6 16 18 29 18 51v39l38 38 7-7-35-35v-35c0-29-18-37-28-65z
+      M256 126c-8 27-25 40-25 61 0 18 11 29 25 38-4-13-3-26 0-38 4 12 5 25 0 38 14-9 25-20 25-38 0-21-17-34-25-61z
+    "/>
+  </defs>
+  <g fill="#b13e53">
+    <use href="#panel"/>
+    <use href="#panel" transform="rotate(90 256 256)"/>
+    <use href="#panel" transform="rotate(180 256 256)"/>
+    <use href="#panel" transform="rotate(270 256 256)"/>
+    <circle cx="256" cy="14" r="5"/>
+    <circle cx="498" cy="256" r="5"/>
+    <circle cx="256" cy="498" r="5"/>
+    <circle cx="14" cy="256" r="5"/>
+  </g>
+</svg>

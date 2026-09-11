@@ -1,0 +1,10 @@
+[cart]
+name = "Horizon Burn"
+author = "Cheesy Crab"
+license = "GPL-3.0-or-later"
+version = "0.6.0"
+entry = "cart.ts"
+abi = "v1"
+category = "Games"
+release = true
+public_source = true

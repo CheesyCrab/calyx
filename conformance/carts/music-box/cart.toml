@@ -1,0 +1,17 @@
+[cart]
+name = "music-box"
+entry = "cart.ts"
+abi = "v1"
+
+[run]
+frames = 120
+feed = "music-box.in.json"
+
+[witness]
+min_distinct_frame_hashes = 16
+
+[expected]
+run_hash = "7e228a305b9bc46d"
+final_hash = "98d6dd3a07f3b15b"
+palette = "SWEETIE_16"
+blessed_by = "core"

@@ -1,0 +1,16 @@
+[cart]
+name = "sunny-math"
+entry = "cart.ts"
+abi = "v1"
+
+[run]
+frames = 1
+
+[witness]
+min_distinct_frame_hashes = 1
+
+[expected]
+run_hash = "5a271b16c18e03d9"
+final_hash = "ac69aba515fa1cb4"
+palette = "SWEETIE_16"
+blessed_by = "core"

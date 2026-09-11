@@ -1,0 +1,11 @@
+[cart]
+name = "fault-color-repeat"
+entry = "cart.ts"
+abi = "v1"
+
+[run]
+frames = 2
+
+[fault]
+frame = -1
+kind = "trap"

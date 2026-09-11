@@ -1,0 +1,13 @@
+{
+  "name": "my-calyx-cart",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A self-contained starter for a Calyx cart.",
+  "type": "module",
+  "scripts": {
+    "build": "asc cart.ts --outFile cart.wasm --optimize --maximumMemory 1024 && node build-complete.mjs"
+  },
+  "devDependencies": {
+    "assemblyscript": "0.28.20"
+  }
+}

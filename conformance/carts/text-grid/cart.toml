@@ -1,0 +1,16 @@
+[cart]
+name = "text-grid"
+entry = "cart.ts"
+abi = "v1"
+
+[run]
+frames = 16
+
+[witness]
+min_distinct_frame_hashes = 12
+
+[expected]
+run_hash = "3d3efdbf0d2aa0d0"
+final_hash = "e7a635372fdd6620"
+palette = "SWEETIE_16"
+blessed_by = "core"

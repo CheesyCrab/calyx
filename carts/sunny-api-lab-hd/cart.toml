@@ -1,0 +1,12 @@
+[cart]
+name = "Sunny API Lab HD"
+author = "Cheesy Crab"
+license = "GPL-3.0-or-later"
+version = "1.0.0"
+entry = "cart.ts"
+abi = "v1"
+category = "Demos"
+release = false
+public_source = true
+display = "hd"
+input = "classic"

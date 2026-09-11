@@ -1,0 +1,10 @@
+[cart]
+name = "Sunny API Lab"
+author = "Cheesy Crab"
+license = "GPL-3.0-or-later"
+version = "1.2.0"
+entry = "cart.ts"
+abi = "v1"
+category = "Demos"
+release = true
+public_source = true

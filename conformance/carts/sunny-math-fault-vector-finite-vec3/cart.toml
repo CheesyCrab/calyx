@@ -1,0 +1,11 @@
+[cart]
+name = "sunny-math-fault-vector-finite-vec3"
+entry = "cart.ts"
+abi = "v1"
+
+[run]
+frames = 1
+
+[fault]
+frame = 0
+kind = "abort"

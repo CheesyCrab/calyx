@@ -1,0 +1,18 @@
+[cart]
+name = "launcher"
+entry = "../../../carts/system/launcher/cart.ts"
+abi = "v1"
+system = true
+
+[run]
+frames = 60
+feed = "launcher.in.json"
+
+[witness]
+min_distinct_frame_hashes = 8
+
+[expected]
+run_hash = "0685b1dff072ff2e"
+final_hash = "7f46ac2a0ca0b0c9"
+palette = "SWEETIE_16"
+blessed_by = "core"

@@ -1,0 +1,5 @@
+{"audio":[{"dur":6,"flags":1,"freq":220,"op":"tone","vol":28}],"f":4}
+{"audio":[{"dur":6,"flags":4,"freq":440,"op":"tone","vol":34}],"f":20}
+{"audio":[{"dur":8,"flags":9,"freq":720,"op":"tone","vol":42}],"f":34}
+{"audio":[{"dur":10,"flags":5,"freq":1080,"op":"tone","vol":46}],"f":50}
+{"audio":[],"f":74,"sys":[{"i":0,"op":"launch"}]}

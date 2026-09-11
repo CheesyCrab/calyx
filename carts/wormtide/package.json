@@ -1,0 +1,14 @@
+{
+  "name": "@cheesycrab/cart-wormtide",
+  "version": "1.0.0",
+  "private": true,
+  "license": "GPL-3.0-or-later",
+  "description": "Wormtide swarm RTS adaptation for Calyx.",
+  "type": "module",
+  "scripts": {
+    "build": "asc cart.ts --outFile cart.wasm --optimize"
+  },
+  "devDependencies": {
+    "assemblyscript": "0.28.20"
+  }
+}

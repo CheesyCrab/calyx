@@ -1,0 +1,17 @@
+[cart]
+name = "boot"
+entry = "../../../carts/system/boot/cart.ts"
+abi = "v1"
+system = true
+
+[run]
+frames = 96
+
+[witness]
+min_distinct_frame_hashes = 24
+
+[expected]
+run_hash = "0f2280deadda1f67"
+final_hash = "640733e669fd0c63"
+palette = "custom:b05e196857e0aca8"
+blessed_by = "core"

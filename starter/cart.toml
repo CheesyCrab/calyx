@@ -1,0 +1,7 @@
+[cart]
+name = "My Calyx Cart"
+author = "Your Name"
+version = "0.1.0"
+entry = "cart.ts"
+abi = "v1"
+category = "Games"

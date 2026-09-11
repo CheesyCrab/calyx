@@ -1,0 +1,13 @@
+# Rust workspace build output; Cargo.lock is committed for reproducible builds.
+/target/
+/.ruff_cache/
+__pycache__/
+*.py[cod]
+
+# Generated catalog/viewer outputs.
+/build/
+/web/carts/
+
+# Developer-local linked carts ("cursed shelf"); opt in to this root explicitly
+# without publishing machine-local paths.
+/carts/.local/

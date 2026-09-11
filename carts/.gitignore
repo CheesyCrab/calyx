@@ -1,0 +1,4 @@
+# Generated cart build artifacts. Keep this at the cart-tree boundary so
+# product, system, example, and newly scaffolded carts inherit the same rule.
+**/node_modules/
+**/cart.wasm

@@ -1,0 +1,14 @@
+{
+  "name": "@cheesycrab/cart-hd-input-lab",
+  "version": "0.2.0",
+  "private": true,
+  "license": "GPL-3.0-or-later",
+  "description": "Calyx Resonator HD arcade instrument and input proof cart.",
+  "type": "module",
+  "scripts": {
+    "build": "asc cart.ts --outFile cart.wasm --optimize"
+  },
+  "devDependencies": {
+    "assemblyscript": "0.28.20"
+  }
+}

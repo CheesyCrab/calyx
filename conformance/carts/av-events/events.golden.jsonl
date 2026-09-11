@@ -1,0 +1,4 @@
+{"f":10,"audio":[{"op":"tone","freq":440,"dur":30,"vol":80,"flags":0}]}
+{"f":20,"audio":[{"op":"tone","freq":220,"dur":15,"vol":60,"flags":5}]}
+{"f":30,"audio":[{"op":"tone","freq":880,"dur":8,"vol":100,"flags":10}]}
+{"f":40,"audio":[{"op":"tone","freq":110,"dur":45,"vol":40,"flags":15}]}

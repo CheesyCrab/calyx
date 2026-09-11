@@ -1,0 +1,17 @@
+[cart]
+name = "seaway-dig"
+entry = "cart.ts"
+abi = "v1"
+
+[run]
+frames = 10600
+feed = "seaway-dig.in.json"
+
+[witness]
+min_distinct_frame_hashes = 240
+
+[expected]
+run_hash = "f36f2adb0bdfe79c"
+final_hash = "aadf9d5d70107a96"
+palette = "custom:7f592d7fe7399945"
+blessed_by = "core"

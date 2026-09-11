@@ -1,0 +1,15 @@
+[
+  { "f": 0,  "hold": [] },
+  { "f": 5,  "hold": ["A"] },
+  { "f": 6,  "hold": [] },
+  { "f": 10, "hold": ["UP", "DOWN", "LEFT", "RIGHT", "A", "B", "START"] },
+  { "f": 11, "hold": ["LEFT"] },
+  { "f": 12, "hold": ["RIGHT"] },
+  { "f": 13, "hold": ["LEFT"] },
+  { "f": 14, "hold": ["RIGHT"] },
+  { "f": 15, "hold": [] },
+  { "f": 30, "hold": ["UP", "A"] },
+  { "f": 31, "hold": ["UP"] },
+  { "f": 32, "hold": [] },
+  { "f": 59, "hold": ["START"] }
+]

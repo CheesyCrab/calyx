@@ -1,0 +1,7 @@
+{
+  "name": "@cheesycrab/cart-sunny-api-lab", "version": "1.2.0", "private": true,
+  "license": "GPL-3.0-or-later",
+  "description": "Interactive Sunny manual and self-documenting ordinary-cart API reference.",
+  "type": "module", "scripts": { "build": "asc cart.ts --outFile cart.wasm --optimize" },
+  "devDependencies": { "assemblyscript": "0.28.20" }
+}

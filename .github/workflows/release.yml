@@ -1,0 +1,218 @@
+name: draft release staging
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  gate:
+    name: Complete public release gate
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: .
+          shared-key: verify
+          cache-on-failure: true
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: |
+            conformance/package-lock.json
+            web/package-lock.json
+
+      - name: Check release tag matches product version
+        run: python3 -c "import os; from tools.product_identity import PRODUCT_VERSION; assert os.environ['GITHUB_REF_NAME'] == f'v{PRODUCT_VERSION}', 'release tag must match PRODUCT_VERSION'"
+
+      - name: Install native build dependencies
+        run: sudo apt-get update && sudo apt-get install -y libasound2-dev
+
+      - name: Install AssemblyScript and web dependencies
+        run: |
+          npm ci --prefix conformance --no-audit --no-fund
+          npm ci --prefix web --no-audit --no-fund
+
+      - name: Install Chromium
+        run: npx --prefix web playwright install --with-deps chromium
+
+      - name: Check public identity and structure
+        run: python3 tools/public_check.py --root .
+
+      - name: Run complete release gate
+        run: python3 tools/dev.py release
+
+      - name: Verify the release archive for Pages
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+          from tools.pages_payload import prepare
+          archives = list(Path('build/distributions').glob('calyx-web-rc-*.tar.gz'))
+          assert len(archives) == 1, 'expected one release web archive'
+          revision = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip()
+          prepare(archives[0], Path('build/pages-verified'), revision)
+          PY
+
+      - name: Stage source, web, checksums, and notices
+        run: |
+          git archive --format=tar.gz --prefix=calyx-${GITHUB_REF_NAME}/ -o build/distributions/calyx-${GITHUB_REF_NAME}-source.tar.gz HEAD
+          (cd build/distributions && sha256sum "calyx-${GITHUB_REF_NAME}-source.tar.gz" > "calyx-${GITHUB_REF_NAME}-source.tar.gz.sha256")
+          python3 -c "from pathlib import Path; roots = sorted(path for path in Path('build/distributions').glob('calyx-web-rc-*') if path.is_dir()); assert len(roots) == 1, roots; (Path('build/distributions') / 'Calyx-NOTICES.txt').write_bytes((roots[0] / 'NOTICES.txt').read_bytes())"
+
+      - name: Upload source, web, checksum, and notice staging
+        uses: actions/upload-artifact@v4
+        with:
+          name: calyx-release-source-web-${{ github.sha }}
+          path: |
+            build/distributions/calyx-${{ github.ref_name }}-source.tar.gz
+            build/distributions/calyx-${{ github.ref_name }}-source.tar.gz.sha256
+            build/distributions/calyx-web-rc-*.tar.gz
+            build/distributions/calyx-web-rc-*.tar.gz.sha256
+            build/distributions/calyx-cart-starter-*.zip
+            build/distributions/calyx-cart-starter-*.zip.sha256
+            build/distributions/Calyx-NOTICES.txt
+          if-no-files-found: error
+          retention-days: 14
+
+  native:
+    name: Native ${{ matrix.artifact }}
+    needs: gate
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            artifact: linux-x86_64
+            suffix: .tar.gz
+            python: python3
+          - runner: windows-2025
+            artifact: windows-x86_64
+            suffix: .zip
+            python: python
+          - runner: macos-15
+            artifact: macos-arm64
+            suffix: .zip
+            python: python3
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: .
+          shared-key: verify
+          cache-on-failure: true
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      - name: Install Linux native build dependencies
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libasound2-dev
+
+      - name: Install AssemblyScript
+        run: npm ci --prefix conformance --no-audit --no-fund
+
+      - name: Build and execute release package
+        run: ${{ matrix.python }} tools/dev.py native-release
+
+      - name: Upload verified native package
+        uses: actions/upload-artifact@v4
+        with:
+          name: calyx-release-${{ matrix.artifact }}-${{ github.sha }}
+          path: |
+            build/distributions/calyx-1.0.0-rc.1-${{ matrix.artifact }}${{ matrix.suffix }}
+            build/distributions/calyx-1.0.0-rc.1-${{ matrix.artifact }}${{ matrix.suffix }}.sha256
+            build/distributions/calyx-1.0.0-rc.1-${{ matrix.artifact }}${{ matrix.suffix }}.verification.json
+          if-no-files-found: error
+          retention-days: 14
+
+  flatpak:
+    name: Flatpak Linux x86_64
+    needs: gate
+    runs-on: ubuntu-24.04
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-25.08
+      options: --privileged
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Trust container-mounted checkout
+        run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - uses: dtolnay/rust-toolchain@stable
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+
+      - name: Install AssemblyScript
+        run: npm ci --prefix conformance --no-audit --no-fund
+
+      - name: Assemble curated Flatpak product input
+        run: python3 tools/catalog.py flatpak-input --profile release
+
+      - name: Prepare Flatpak artifact directory
+        run: mkdir -p build/distributions
+
+      - name: Build source-based Flatpak bundle
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          bundle: build/distributions/calyx-1.0.0-rc.1-linux-x86_64.flatpak
+          manifest-path: packaging/flatpak/org.cheesycrab.Calyx.yml
+          branch: stable
+          cache-key: calyx-flatpak-freedesktop-25.08-${{ hashFiles('Cargo.lock') }}
+          upload-artifact: false
+
+      - name: Fresh-install and execute Flatpak bundle
+        run: python3 tools/catalog.py verify-flatpak build/distributions/calyx-1.0.0-rc.1-linux-x86_64.flatpak
+
+      - name: Upload verified Flatpak package
+        uses: actions/upload-artifact@v4
+        with:
+          name: calyx-release-flatpak-linux-x86_64-${{ github.sha }}
+          path: |
+            build/distributions/calyx-1.0.0-rc.1-linux-x86_64.flatpak
+            build/distributions/calyx-1.0.0-rc.1-linux-x86_64.flatpak.sha256
+            build/distributions/calyx-1.0.0-rc.1-linux-x86_64.flatpak.verification.json
+          if-no-files-found: error
+          retention-days: 14
+
+  draft:
+    name: Stage draft release
+    needs:
+      - gate
+      - native
+      - flatpak
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - name: Download every verified release artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: release-assets
+          merge-multiple: true
+
+      - name: Create or update draft release only
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          prerelease: true
+          generate_release_notes: false
+          files: release-assets/**

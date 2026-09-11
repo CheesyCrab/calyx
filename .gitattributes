@@ -1,0 +1,4 @@
+**/icon.bin binary
+assets/brand/*.svg text eol=lf
+packaging/flatpak/*.yml text eol=lf
+packaging/flatpak/org.cheesycrab.Calyx text eol=lf

@@ -1,0 +1,17 @@
+[cart]
+name = "split-flap-fortunes"
+entry = "cart.ts"
+abi = "v1"
+
+[run]
+frames = 430
+feed = "split-flap-fortunes.in.json"
+
+[witness]
+min_distinct_frame_hashes = 20
+
+[expected]
+run_hash = "90a9676081cde320"
+final_hash = "61cf049316809024"
+palette = "SWEETIE_16"
+blessed_by = "core"

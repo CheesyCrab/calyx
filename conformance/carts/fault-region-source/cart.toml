@@ -1,0 +1,11 @@
+[cart]
+name = "fault-region-source"
+entry = "cart.ts"
+abi = "v1"
+
+[run]
+frames = 2
+
+[fault]
+frame = 0
+kind = "trap"

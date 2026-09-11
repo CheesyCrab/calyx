@@ -1,0 +1,15 @@
+{
+  "name": "@cheesycrab/cart-micro-ai-war",
+  "version": "0.1.0",
+  "private": true,
+  "license": "GPL-3.0-or-later",
+  "description": "Tactile doctrine-building auto-battler for Calyx.",
+  "type": "module",
+  "scripts": {
+    "assets": "python3 build_title_asset.py && python3 ../../tools/png2src.py art/title-320.png -o title_asset.ts --name TITLE_ART --palette-file art/war-palette.txt",
+    "build": "asc cart.ts --outFile cart.wasm --optimize"
+  },
+  "devDependencies": {
+    "assemblyscript": "0.28.20"
+  }
+}

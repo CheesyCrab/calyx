@@ -1,0 +1,55 @@
+name: publish verified web release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Published release tag to deploy
+        required: true
+        default: v1.0.0-rc.1
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    if: ${{ !github.event.repository.private }}
+    runs-on: ubuntu-24.04
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      RELEASE_TAG: ${{ inputs.tag }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: refs/tags/${{ inputs.tag }}
+
+      - name: Verify published release and download its web payload
+        run: |
+          python3 -c "import os; from tools.product_identity import PRODUCT_VERSION; assert os.environ['RELEASE_TAG'] == f'v{PRODUCT_VERSION}', 'release tag must match PRODUCT_VERSION'"
+          test "$(gh release view "$RELEASE_TAG" --json isDraft --jq .isDraft)" = false
+          gh release download "$RELEASE_TAG" --dir downloads --pattern 'calyx-web-rc-*.tar.gz' --pattern 'calyx-web-rc-*.tar.gz.sha256'
+          python3 -c "from pathlib import Path; import subprocess; from tools.pages_payload import prepare; archives = list(Path('downloads').glob('*.tar.gz')); assert len(archives) == 1, 'expected one release web archive'; prepare(archives[0], Path('pages-site'), subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip())"
+
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: pages-site
+
+  deploy:
+    needs: prepare
+    runs-on: ubuntu-24.04
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy verified payload
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,14 @@
+{
+  "name": "@cheesycrab/cart-hd-boot",
+  "version": "0.2.0",
+  "private": true,
+  "license": "GPL-3.0-or-later",
+  "description": "Deterministic geometric Classic-to-HD opening ceremony.",
+  "type": "module",
+  "scripts": {
+    "build": "asc cart.ts --outFile cart.wasm --optimize"
+  },
+  "devDependencies": {
+    "assemblyscript": "0.28.20"
+  }
+}

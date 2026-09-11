@@ -1,0 +1,19 @@
+[cart]
+name = "hd-input"
+entry = "../../../carts/examples/hd-input-lab/cart.ts"
+abi = "v1"
+
+[run]
+frames = 140
+width = 1280
+height = 720
+feed = "hd-input.in.json"
+
+[witness]
+min_distinct_frame_hashes = 50
+
+[expected]
+run_hash = "a1c4b0155cbb68ad"
+final_hash = "c8024fac829f108d"
+palette = "custom:9562b88ab0739410"
+blessed_by = "core"

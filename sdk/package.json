@@ -1,0 +1,23 @@
+{
+  "name": "@cheesycrab/sunny",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AssemblyScript cart SDK for Cheesy Crab Calyx (ABI v1.6) — the CartBase-shaped authoring face.",
+  "license": "MIT OR Apache-2.0",
+  "type": "module",
+  "ascMain": "assembly/index.ts",
+  "files": [
+    "assembly/"
+  ],
+  "keywords": [
+    "calyx",
+    "assemblyscript",
+    "fantasy-console"
+  ],
+  "devDependencies": {
+    "assemblyscript": "0.28.20"
+  },
+  "peerDependencies": {
+    "assemblyscript": "0.28.20"
+  }
+}

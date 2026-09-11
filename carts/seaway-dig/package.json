@@ -1,0 +1,14 @@
+{
+  "name": "@cheesycrab/cart-seaway-dig",
+  "version": "1.0.0",
+  "private": true,
+  "license": "GPL-3.0-or-later",
+  "description": "High-fidelity Seaway Dig adaptation for Calyx.",
+  "type": "module",
+  "scripts": {
+    "build": "asc cart.ts --outFile cart.wasm --optimize"
+  },
+  "devDependencies": {
+    "assemblyscript": "0.28.20"
+  }
+}

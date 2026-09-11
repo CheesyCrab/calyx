@@ -1,0 +1,21 @@
+[package]
+name = "calyx-core"
+version = "0.1.0"
+description = "Calyx native runtime core — framebuffer, palette, input, ABI host (presenter-independent)."
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[lib]
+name = "calyx_core"
+path = "src/lib.rs"
+
+[dependencies]
+# The cart host. Keep upgrades deliberate and conformance-gated.
+wasmtime = "48"
+# Parse the embedded font and the scripted input feed (stdlib JSON is not
+# in core). No serde derive — these are read once, by hand, from Value.
+serde_json = "1"
+
+[dev-dependencies]
+wat = "1"

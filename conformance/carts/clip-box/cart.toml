@@ -1,0 +1,17 @@
+[cart]
+name = "clip-box"
+entry = "cart.ts"
+abi = "v1"
+
+[run]
+frames = 60
+feed = "clip-box.in.json"
+
+[witness]
+min_distinct_frame_hashes = 30
+
+[expected]
+run_hash = "baeea85f76e38a8d"
+final_hash = "2acfeb8c0b981bf2"
+palette = "SWEETIE_16"
+blessed_by = "core"

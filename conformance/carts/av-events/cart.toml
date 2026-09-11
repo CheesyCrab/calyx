@@ -1,0 +1,16 @@
+[cart]
+name = "av-events"
+entry = "cart.ts"
+abi = "v1"
+
+[run]
+frames = 64
+
+[witness]
+min_distinct_frame_hashes = 30
+
+[expected]
+run_hash = "e24cb45c3fb7dd98"
+final_hash = "a2f5d1e1bf702b2d"
+palette = "custom:507287d5ba8a4985"
+blessed_by = "core"

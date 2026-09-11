@@ -1,0 +1,5 @@
+# SDL2 2.x still declares compatibility with pre-3.5 CMake policy syntax.
+# CMake 4 requires consumers to opt into that compatibility explicitly.
+# Keep this in the repository so local, CI, and cross builds agree.
+[env]
+CMAKE_POLICY_VERSION_MINIMUM = "3.5"

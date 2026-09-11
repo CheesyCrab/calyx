@@ -1,0 +1,17 @@
+[cart]
+name = "micro-ai-war"
+entry = "cart.ts"
+abi = "v1"
+
+[run]
+frames = 2800
+feed = "micro-ai-war.in.json"
+
+[witness]
+min_distinct_frame_hashes = 180
+
+[expected]
+run_hash = "00dec28f9dccbba2"
+final_hash = "88ea6e84edf51e16"
+palette = "custom:2849d778bd09db3c"
+blessed_by = "core"

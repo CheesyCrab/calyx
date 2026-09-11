@@ -1,0 +1,17 @@
+[cart]
+name = "checker"
+entry = "cart.ts"
+abi = "v1"
+
+[run]
+frames = 30
+feed = "checker.in.json"
+
+[witness]
+min_distinct_frame_hashes = 20
+
+[expected]
+run_hash = "229f7fafed80e884"
+final_hash = "f133490327d9ef36"
+palette = "SWEETIE_16"
+blessed_by = "core"

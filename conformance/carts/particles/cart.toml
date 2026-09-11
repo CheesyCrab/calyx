@@ -1,0 +1,17 @@
+[cart]
+name = "particles"
+entry = "cart.ts"
+abi = "v1"
+
+[run]
+frames = 120
+feed = "particles.in.json"
+
+[witness]
+min_distinct_frame_hashes = 60
+
+[expected]
+run_hash = "f9e2d22f087941ec"
+final_hash = "14bd11a80930b7f7"
+palette = "SWEETIE_16"
+blessed_by = "core"

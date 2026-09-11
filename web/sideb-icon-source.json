@@ -1,0 +1,13 @@
+{
+  "source": "../assets/brand/calyx-sideb-mark.svg",
+  "source_sha256": "7deb9fa6457d7660ea49d346999d5892b818a096276c085ee6269fa227bceb7a",
+  "generator": "web/tools/gen-icons.mjs",
+  "background": "#1a1c2c",
+  "outputs": {
+    "sideb-icon-192.png": 192,
+    "sideb-icon-512.png": 512,
+    "sideb-icon-maskable-192.png": 192,
+    "sideb-icon-maskable-512.png": 512,
+    "sideb-apple-touch-icon.png": 180
+  }
+}

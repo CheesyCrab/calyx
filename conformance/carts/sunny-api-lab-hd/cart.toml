@@ -1,0 +1,20 @@
+[cart]
+name = "sunny-api-lab-hd"
+entry = "../../../carts/sunny-api-lab-hd/cart.ts"
+abi = "v1"
+
+[run]
+frames = 180
+width = 1280
+height = 720
+feed = "tour.in.json"
+
+[witness]
+min_distinct_frame_hashes = 12
+
+[expected]
+run_hash = "02d867bf74f6dcf1"
+final_hash = "06849fd68f9f364d"
+palette = "SWEETIE_16"
+blessed_by = "core"
+color = "rgba8888"

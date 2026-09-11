@@ -1,0 +1,6 @@
+[
+  { "name": "Horizon Burn", "category": "Games", "play": "start" },
+  { "name": "hello-sunny", "category": "Demos", "play": "a" },
+  { "name": "Sunny API Lab", "category": "Demos", "play": "a" },
+  { "name": "Settings", "category": "Settings", "play": "down" }
+]

@@ -1,0 +1,19 @@
+[cart]
+name = "drawing-rgba-hd"
+entry = "cart.ts"
+abi = "v1"
+
+[run]
+frames = 8
+width = 1280
+height = 720
+
+[witness]
+min_distinct_frame_hashes = 8
+
+[expected]
+run_hash = "80c6ddcbba094efb"
+final_hash = "42c96926045dd244"
+palette = "custom:a6ce535eb6de8b51"
+blessed_by = "core"
+color = "rgba8888"

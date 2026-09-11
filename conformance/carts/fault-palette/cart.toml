@@ -1,0 +1,14 @@
+[cart]
+name  = "fault-palette"
+entry = "cart.ts"
+abi   = "v1"
+
+[run]
+frames = 10
+
+# This cart is EXPECTED to fault (ABI §6a). The grader asserts the run
+# trapped with this kind at this frame, instead of a run_hash. `msg` is
+# runtime-flavored and never compared.
+[fault]
+frame = 0
+kind  = "trap"

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<script>if (navigator.standalone === true) document.documentElement.dataset.iosStandalone = "true";</script>
+<title>Calyx</title>
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="stylesheet" href="./styles.css">
+<meta name="theme-color" content="#1a1c2c">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+  <header class="brandbar">
+    <button id="boot-replay" class="brandmark-shell" type="button" aria-label="Replay Calyx boot animation">
+      <img class="brandmark" src="./icon.svg" alt="">
+    </button>
+    <div class="brandcopy">
+      <strong>CALYX</strong>
+    </div>
+    <span id="release-label" class="release-label">release candidate</span>
+  </header>
+
+  <main class="player" aria-label="Calyx player">
+    <section class="screen-stage">
+      <canvas id="screen" width="320" height="240" aria-label="Calyx game screen"></canvas>
+      <output id="perf-overlay" class="perf-overlay" aria-label="Web presenter performance" hidden>
+        <span>FPS <strong id="perf-fps">--.-/--</strong></span>
+        <span>SIM <strong id="perf-sim">--.--</strong> MS</span>
+        <span>DRAW <strong id="perf-draw">--.--</strong> MS</span>
+        <span>WORK <strong id="perf-work">--%</strong></span>
+      </output>
+      <div id="touch-controls" class="touch-controls" hidden aria-hidden="true"></div>
+    </section>
+
+    <div class="statusline" role="status" aria-live="polite">
+      <span id="msg">loading…</span>
+      <span id="offline-state" class="state-pill" hidden>offline ready</span>
+      <span id="update-state" class="state-pill update" hidden>update ready</span>
+    </div>
+
+    <nav class="toolbar" aria-label="Player controls">
+      <button id="home-button" type="button" hidden>Home</button>
+      <input id="local-cart-file" type="file" accept=".wasm,application/wasm" hidden>
+      <button id="audio-toggle" type="button" aria-pressed="false">Sound</button>
+      <button id="fullscreen-button" type="button">Fullscreen</button>
+      <button id="help-button" type="button" aria-expanded="false">Help</button>
+      <button id="play-local-button" class="utility-upload" type="button" hidden>Upload</button>
+    </nav>
+    <section id="local-cart-error" class="local-cart-error" role="alert" hidden>
+      <strong>That cart did not run.</strong>
+      <span id="local-cart-error-message"></span>
+      <button id="choose-local-again" type="button">Choose another cart</button>
+    </section>
+  </main>
+
+  <div id="confirm-panel" class="confirm-panel" role="alertdialog" aria-modal="true" aria-labelledby="confirm-title" aria-describedby="confirm-description" hidden>
+    <div class="confirm-card">
+      <span class="eyebrow">SESSION IN PROGRESS</span>
+      <h1 id="confirm-title">Leave this cart?</h1>
+      <p id="confirm-description">Your current session will be discarded.</p>
+      <div class="confirm-actions">
+        <button id="confirm-cancel" type="button">Cancel</button>
+        <button id="confirm-accept" type="button">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="upload-info-panel" class="upload-info-panel" role="dialog" aria-modal="true" aria-labelledby="upload-info-title" aria-describedby="upload-info-description" hidden>
+    <div class="confirm-card upload-info-card">
+      <span class="eyebrow">LOCAL CART</span>
+      <h1 id="upload-info-title">What is Upload?</h1>
+      <p id="upload-info-description">Calyx can run small games made for it. If you have a Calyx <code>.wasm</code> cart, choose it here. The file stays on this device and runs only for this session.</p>
+      <p class="upload-info-aside">Just here to play? You can safely ignore Upload.</p>
+      <div class="confirm-actions">
+        <button id="upload-info-cancel" type="button">Not now</button>
+        <button id="upload-info-continue" type="button">Choose a cart</button>
+      </div>
+    </div>
+  </div>
+
+  <aside id="help-panel" class="help-panel" hidden>
+    <div class="help-card">
+      <header class="help-heading">
+        <div><span class="eyebrow">CALYX PLAYER</span><h1>Help</h1></div>
+        <button id="help-close" class="help-close" type="button" aria-label="Close help">×</button>
+      </header>
+      <section class="help-section" aria-labelledby="controls-heading">
+        <h2 id="controls-heading">Controls</h2>
+        <dl class="control-list">
+          <div><dt>Move</dt><dd>Arrows / WASD / D-pad</dd></div>
+          <div><dt>A · B</dt><dd>Z · X / face buttons</dd></div>
+          <div><dt>X · Y</dt><dd>A · S / face buttons</dd></div>
+          <div><dt>L · R</dt><dd>Q · W / shoulders</dd></div>
+          <div><dt>Menu</dt><dd>Enter / controller Start</dd></div>
+          <div><dt>Home</dt><dd>Backspace / controller Back</dd></div>
+        </dl>
+        <p class="help-note">On touch, Menu is the controller Start input. Extended HD carts place the full control deck around or below the screen; a controller remains the roomiest option. Home asks before ending the current run.</p>
+      </section>
+      <section class="help-section" aria-labelledby="make-heading">
+        <h2 id="make-heading">Make a cart</h2>
+        <p class="help-note">Download the Node-only starter, edit one file, run <code>npm run build</code>, then return Home and choose <strong>Upload</strong>. Your Wasm stays on this device.</p>
+        <p><a href="./downloads/calyx-cart-starter-1.0.0-rc.1.zip" download>Download the Calyx cart starter</a></p>
+      </section>
+      <section id="build-note-section" class="help-section build-note-section" aria-labelledby="build-note-heading" hidden>
+        <h2 id="build-note-heading">On this build</h2>
+        <p id="build-note" class="build-note"></p>
+      </section>
+      <section class="help-section advanced-section" aria-labelledby="advanced-toggle">
+        <button id="advanced-toggle" class="advanced-toggle" type="button" aria-expanded="false">Advanced</button>
+        <div id="advanced-panel" class="advanced-panel" hidden>
+          <div class="diagnostic-option">
+            <button id="perf-toggle" type="button" aria-pressed="false">Performance overlay: Off</button>
+            <p>Shows actual/target FPS, simulation time per tick, draw time per frame, and measured frame-budget use.</p>
+          </div>
+          <dl class="build-info">
+            <div><dt>Channel</dt><dd id="build-channel">Unavailable</dd></div>
+            <div><dt>Source</dt><dd id="build-source">Unavailable</dd></div>
+            <div><dt>Built</dt><dd id="build-built">Unavailable</dd></div>
+            <div><dt>Deployed</dt><dd id="build-deployed">Unavailable</dd></div>
+            <div><dt>Payload</dt><dd id="build-payload">Unavailable</dd></div>
+            <div><dt>ABI</dt><dd id="build-abi">Unavailable</dd></div>
+          </dl>
+        </div>
+      </section>
+      <section class="help-section share-section" aria-labelledby="share-heading">
+        <h2 id="share-heading">Share Calyx</h2>
+        <div class="share-layout">
+          <div id="share-qr" class="share-qr" aria-live="polite"></div>
+          <div class="share-copy">
+            <a id="share-link" href="./" target="_blank" rel="noopener">Open this player</a>
+            <div class="share-actions">
+              <button id="copy-link" type="button">Copy link</button>
+              <button id="share-link-button" type="button">Share…</button>
+            </div>
+            <span id="share-status" class="share-status" role="status" aria-live="polite"></span>
+          </div>
+        </div>
+      </section>
+    </div>
+  </aside>
+  <script src="./node_modules/qrcode-generator/qrcode.js"></script>
+  <script type="module" src="./app.mjs"></script>
+</body>
+</html>

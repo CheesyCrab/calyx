@@ -1,0 +1,18 @@
+[cart]
+name = "settings"
+entry = "../../../carts/system/settings/cart.ts"
+abi = "v1"
+system = true
+
+[run]
+frames = 60
+feed = "settings.in.json"
+
+[witness]
+min_distinct_frame_hashes = 8
+
+[expected]
+run_hash = "0056a762acec390e"
+final_hash = "5155d460e062e2ab"
+palette = "SWEETIE_16"
+blessed_by = "core"

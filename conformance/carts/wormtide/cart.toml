@@ -1,0 +1,17 @@
+[cart]
+name = "wormtide"
+entry = "cart.ts"
+abi = "v1"
+
+[run]
+frames = 1250
+feed = "wormtide.in.json"
+
+[witness]
+min_distinct_frame_hashes = 120
+
+[expected]
+run_hash = "f74a9a2f27cb1c54"
+final_hash = "afbc40344194b2f6"
+palette = "custom:0218a50ecf77338f"
+blessed_by = "core"

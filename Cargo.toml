@@ -1,0 +1,14 @@
+# Calyx native runtime workspace.
+[workspace]
+resolver = "2"
+members = ["crates/core", "crates/cli"]
+
+[workspace.package]
+edition = "2021"
+license = "LGPL-3.0-or-later"
+publish = false
+
+# Optimize dependencies lightly so debug/test runs remain responsive while the
+# workspace crates stay at debug speed.
+[profile.dev]
+opt-level = 1
